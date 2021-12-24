@@ -77,7 +77,7 @@ module.exports.userLogin = async function (req, res) {
 
       nodemailer.transporter.sendMail(
         {
-          from: "sharmanoreply1@gmail.com",
+          from: env.email,
           to: req.body.email,
           subject: "Hey There Welcome to the test app",
           text: `Welcome ${req.body.name} you have successfully Logged in`,

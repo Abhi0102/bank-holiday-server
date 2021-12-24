@@ -1,8 +1,8 @@
-
 const production = {
   name: "production",
   db: process.env.db,
   port: process.env.port,
+  email: process.env.email,
   smtp: {
     service: process.env.service,
     host: process.env.host,
