@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-
-mongoose.connect("mongodb://localhost/bank-holidays-test");
+const env = require("./environment");
+mongoose.connect(env.db);
 
 const db = mongoose.connection;
 

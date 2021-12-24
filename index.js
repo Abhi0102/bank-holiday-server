@@ -1,10 +1,12 @@
+const dotenv = require("dotenv").config();
 const express = require("express");
 const routes = require("./routes");
 const db = require("./config/mongoose");
 const passport = require("passport");
 const jwtPassport = require("./config/passport-jwt");
+const env = require("./config/environment");
 
-const port = 8000;
+const port = env.port;
 const app = express();
 
 app.use(express.urlencoded());

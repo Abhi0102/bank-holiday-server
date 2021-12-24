@@ -2,10 +2,11 @@ const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
 const extractJWT = require("passport-jwt").ExtractJwt;
 const User = require("../models/user");
+const env = require("./environment");
 
 const opts = {
   jwtFromRequest: extractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey: "abhishek",
+  secretOrKey: env.secret,
 };
 
 passport.use(

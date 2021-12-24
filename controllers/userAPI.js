@@ -1,5 +1,7 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("../config/nodemailer");
+const env = require("../config/environment");
 
 module.exports.register = async function (req, res) {
   // Checking If password matches
@@ -21,6 +23,24 @@ module.exports.register = async function (req, res) {
         email: req.body.email,
         password: req.body.password,
       });
+
+      nodemailer.transporter.sendMail(
+        {
+          from: "sharmanoreply1@gmail.com",
+          to: req.body.email,
+          subject: "Hey There Welcome to the test app",
+          text: `Welcome ${req.body.name} you have successfully signed in`,
+        },
+        (err, info) => {
+          if (err) {
+            console.log("Error in Sending mail", err);
+            return;
+          } else {
+            console.log("Mail Delviered");
+            return;
+          }
+        }
+      );
 
       return res.status(200).json({
         data: {
@@ -55,10 +75,27 @@ module.exports.userLogin = async function (req, res) {
         email: user.email,
       };
 
-      console.log("Success");
+      nodemailer.transporter.sendMail(
+        {
+          from: "sharmanoreply1@gmail.com",
+          to: req.body.email,
+          subject: "Hey There Welcome to the test app",
+          text: `Welcome ${req.body.name} you have successfully Logged in`,
+        },
+        (err, info) => {
+          if (err) {
+            console.log("Error in Sending mail", err);
+            return;
+          } else {
+            console.log("Mail Delviered");
+            return;
+          }
+        }
+      );
+
       return res.status(200).json({
         data: {
-          token: jwt.sign(userJWT, "abhishek", { expiresIn: "50000000" }),
+          token: jwt.sign(userJWT, env.secret, { expiresIn: "50000000" }),
           success: true,
           user: userJWT,
         },
